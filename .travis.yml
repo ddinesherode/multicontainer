@@ -1,7 +1,7 @@
 sudo: required
 services:
     - docker
-	
+
 before_install:
     - docker build -t ddinesherode/multicontainer -f ./client/Dockerfile.dev
 	
@@ -13,8 +13,6 @@ after_success:
     - docker build -t ddinesherode/multi-nginx ./nginx
     - docker build -t ddinesherode/multi-server ./server
     - docker build -t ddinesherode/multi-worker ./worker
-    
-#push image files to docker hub
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     - docker push ddinesherode/multi-client
     - docker push ddinesherode/multi-nginx
